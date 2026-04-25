@@ -57,3 +57,15 @@ export async function deletarContato(id) {
 
   return true
 }
+ const novoContato = {
+        nome: "Doidas do PSI",
+        celular: "11 9 7070-2020",
+        foto: "https://img.freepik.com/psd-gratuitas/renderizacao-3d-do-estilo-de-cabelo-para-o-design-do-avatar_23-2151869121.jpg",
+        email: "Capivaras@yahoo.com.br",
+        endereco: "sei la eu, 234",
+        cidade: "São Roque"
+    }
+
+
+
+deleteContato(106)
