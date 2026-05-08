@@ -59,10 +59,6 @@ export async function deletarContato(id) {
 
   return true
 }
-<<<<<<< HEAD
-
-
-=======
 const novoContato = {
         nome: "Isabelle lourenço",
         celular: "11 9 720204542",
@@ -71,4 +67,3 @@ const novoContato = {
         endereco: "coitadolandia, 234",
         cidade: "São Roque"
     }
->>>>>>> e20299f (versionamento desfeito)
