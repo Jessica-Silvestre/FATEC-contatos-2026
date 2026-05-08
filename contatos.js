@@ -37,7 +37,7 @@ export async function atualizarContato(id, contato) {
     body: JSON.stringify(contato)
   }
 
-  const response = await fetch(`${BASE_URL}/${id}`, options)
+  const response = await fetch(${BASE_URL}/${id}, options)
 
   if (!response.ok) {
     throw new Error("Erro ao atualizar contato")
@@ -51,7 +51,7 @@ export async function deletarContato(id) {
     method: "DELETE"
   }
 
-  const response = await fetch(`${BASE_URL}/${id}`, options)
+  const response = await fetch(${BASE_URL}/${id}, options)
 
   if (!response.ok) {
     throw new Error("Erro ao deletar contato")
@@ -59,5 +59,16 @@ export async function deletarContato(id) {
 
   return true
 }
+<<<<<<< HEAD
 
 
+=======
+const novoContato = {
+        nome: "Isabelle lourenço",
+        celular: "11 9 720204542",
+        foto: "https://img.freepik.com/psd-gratuitas/renderizacao-3d-do-estilo-de-cabelo-para-o-design-do-avatar_23-2151869121.jpg",
+        email: "lalala@yahoo.com.br",
+        endereco: "coitadolandia, 234",
+        cidade: "São Roque"
+    }
+>>>>>>> e20299f (versionamento desfeito)
