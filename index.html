@@ -1,12 +1,110 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./app.js" defer type="module"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <title>Contatos</title>
 </head>
 <body>
-    
+
+
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <span class="header-icon">✦</span>
+        <h1>Contatos</h1>
+      </div>
+     <button class="btn-novo" id="btnNovo">
+       Novo Contato
+      </button>
+    </div>
+  </header>
+
+  
+  <div class="search-bar">
+    <div class="search-inner">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="inputBusca" placeholder="Buscar por nome, cidade ou e-mail…">
+    </div>
+  </div>
+
+
+  <main>
+    <div id="estadoCarregando" class="estado-carregando">
+      <div class="spinner"></div>
+      <p>Carregando contatos…</p>
+    </div>
+    <div id="estadoVazio" class="estado-vazio hidden">
+      <span class="icone-vazio">◎</span>
+      <p>Nenhum contato encontrado.</p>
+    </div>
+    <div id="listaContatos" class="grid-contatos hidden"></div>
+  </main>
+
+ 
+  <div id="modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="modalTitulo">Novo Contato</h2>
+        <button class="btn-fechar" id="btnFechar" aria-label="Fechar modal">✕</button>
+      </div>
+
+      <form id="formContato" novalidate>
+        <input type="hidden" id="contatoId">
+
+        <div class="form-avatar-preview">
+          <img id="previewFoto" src="" alt="Prévia da foto" class="hidden">
+          <span id="avatarPlaceholder" class="avatar-placeholder">👤</span>
+        </div>
+
+        <div class="form-grupo">
+          <label for="inputNome">Nome *</label>
+          <input type="text" id="inputNome" placeholder="Nome completo" required>
+        </div>
+        <div class="form-grupo">
+          <label for="inputCelular">Celular *</label>
+          <input type="tel" id="inputCelular" placeholder="11 9 0000-0000" required>
+        </div>
+        <div class="form-grupo">
+          <label for="inputEmail">E-mail</label>
+          <input type="email" id="inputEmail" placeholder="email@exemplo.com">
+        </div>
+        <div class="form-grupo">
+          <label for="inputFoto">URL da Foto</label>
+          <input type="url" id="inputFoto" placeholder="https://…">
+        </div>
+        <div class="form-linha">
+          <div class="form-grupo">
+            <label for="inputEndereco">Endereço</label>
+            <input type="text" id="inputEndereco" placeholder="Rua, número">
+          </div>
+          <div class="form-grupo">
+            <label for="inputCidade">Cidade</label>
+            <input type="text" id="inputCidade" placeholder="Cidade">
+          </div>
+        </div>
+
+        <div id="erroForm" class="erro-form hidden"></div>
+
+        <div class="form-acoes">
+          <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
+          <button type="submit" class="btn-salvar" id="btnSalvar">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div id="toast" class="toast hidden" role="alert" aria-live="polite"></div>
+
+   <footer>
+    <b>Fatec São Roque – Aluna: Jéssica Silvestre de Paula – RA: 2650832513013</b>
+  </footer>
+
+  
 </body>
 </html>
