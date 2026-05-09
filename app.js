@@ -1,63 +1,191 @@
 
+import {
+  getContatos,
+  criarContato,
+  atualizarContato,
+  deletarContato
 
-const BASE_URL = "https://bakcend-fecaf-render.onrender.com/contatos"
+} from './contatos.js'
 
-export async function getContatos() {
-  const response = await fetch(BASE_URL)
-  if (!response.ok) {
-    throw new Error("Erro ao buscar contatos")
+
+const lista = document.getElementById('lista-contatos')
+
+const form = document.getElementById('form-contato')
+
+let idEditando = null
+
+
+// LISTAR CONTATOS// 
+
+async function carregarContatos(){
+
+  try{
+
+    const contatos = await getContatos()
+
+    lista.innerHTML = ''
+
+    contatos.forEach(contato => {
+
+      lista.innerHTML += `
+      
+        <div class="card">
+
+          <img src="${contato.foto}">
+
+          <h2>${contato.nome}</h2>
+
+          <p>${contato.email}</p>
+
+          <p>${contato.celular}</p>
+
+          <p>${contato.cidade}</p>
+
+          <button onclick="editar(${contato.id})">
+            Editar
+          </button>
+
+          <button onclick="excluir(${contato.id})">
+            Excluir
+          </button>
+
+        </div>
+      `
+    })
+
+  }catch(error){
+
+    alert(error.message)
   }
-  return response.json()
 }
 
-export async function criarContato(contato) {
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(contato)
+
+//  CADASTRAR / EDITAR// 
+
+form.addEventListener('submit', async function(event){
+
+  event.preventDefault()
+
+  const contato = {
+
+    nome: document.getElementById('nome').value,
+
+    celular: document.getElementById('celular').value,
+
+    foto: document.getElementById('foto').value,
+
+    email: document.getElementById('email').value,
+
+    endereco: document.getElementById('endereco').value,
+
+    cidade: document.getElementById('cidade').value
   }
 
-  const response = await fetch(BASE_URL, options)
+  try{
 
-  if (!response.ok) {
-    throw new Error("Erro ao criar contato")
+    // EDITAR
+    if(idEditando){
+
+      await atualizarContato(idEditando, contato)
+
+      idEditando = null
+
+    }else{
+
+      // CRIAR
+      await criarContato(contato)
+    }
+
+    form.reset()
+
+    carregarContatos()
+
+  }catch(error){
+
+    alert(error.message)
   }
+})
 
-  return response.json()
+
+// EXCLUIR// 
+
+async function excluir(id){
+
+  try{
+
+    await deletarContato(id)
+
+    carregarContatos()
+
+  }catch(error){
+
+    alert(error.message)
+  }
 }
 
-export async function atualizarContato(id, contato) {
-  const options = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(contato)
+
+// EDITAR// 
+
+async function editar(id){
+
+  try{
+
+    const contatos = await getContatos()
+
+    const contato = contatos.find(c => c.id == id)
+
+    document.getElementById('nome').value = contato.nome
+
+    document.getElementById('celular').value = contato.celular
+
+    document.getElementById('foto').value = contato.foto
+
+    document.getElementById('email').value = contato.email
+
+    document.getElementById('cidade').value = contato.cidade
+
+    idEditando = id
+
+  }catch(error){
+
+    alert(error.message)
   }
-
-  const response = await fetch(`${BASE_URL}/${id}`, options)
-
-  if (!response.ok) {
-    throw new Error("Erro ao atualizar contato")
-  }
-
-  return response.json()
-}
-
-export async function deletarContato(id) {
-  const options = {
-    method: "DELETE"
-  }
-
-  const response = await fetch(`${BASE_URL}/${id}`, options)
-
-  if (!response.ok) {
-    throw new Error("Erro ao deletar contato")
-  }
-
-  return true
 }
 
 
+// FUNÇÕES GLOBAIS
+window.editar = editar
+
+window.excluir = excluir
+
+// PREVIEW E CONVERSÃO FOTO// 
+
+const previewInput = document.getElementById('preview-input')
+const previewImage = document.getElementById('preview-image')
+const fotoInput = document.getElementById('foto')
+
+previewInput.addEventListener('change', function () {
+
+  const file = this.files[0]
+
+  if (!file) return
+
+  const reader = new FileReader()
+
+  reader.onload = function (event) {
+
+    // base64 da imagem
+    const base64 = event.target.result
+
+    // coloca no input foto
+    fotoInput.value = base64
+
+    // atualiza preview
+    previewImage.src = base64
+  }
+
+  reader.readAsDataURL(file)
+})
+
+// INICIAR
+carregarContatos()

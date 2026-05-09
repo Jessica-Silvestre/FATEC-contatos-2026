@@ -1,5 +1,3 @@
-
-
 const BASE_URL = "https://bakcend-fecaf-render.onrender.com/contatos"
 
 export async function getContatos() {
@@ -37,7 +35,7 @@ export async function atualizarContato(id, contato) {
     body: JSON.stringify(contato)
   }
 
-  const response = await fetch(${BASE_URL}/${id}, options)
+  const response = await fetch(`${BASE_URL}/${id}`, options)
 
   if (!response.ok) {
     throw new Error("Erro ao atualizar contato")
@@ -51,7 +49,7 @@ export async function deletarContato(id) {
     method: "DELETE"
   }
 
-  const response = await fetch(${BASE_URL}/${id}, options)
+  const response = await fetch(`${BASE_URL}/${id}`, options)
 
   if (!response.ok) {
     throw new Error("Erro ao deletar contato")
@@ -67,3 +65,4 @@ const novoContato = {
         endereco: "coitadolandia, 234",
         cidade: "São Roque"
     }
+    
