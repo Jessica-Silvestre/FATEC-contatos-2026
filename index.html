@@ -6,12 +6,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet"
-  />
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
   <script src="./app.js" defer type="module"></script>
@@ -21,10 +16,31 @@
 
 <body>
 
+  <!-- LOGIN -->
+
+<section id="container-login">
+
+    <h2>Login</h2>
+
+    <label for="login-email">E-mail</label>
+    <input type="email" id="login-email" placeholder="Digite seu e-mail">
+
+    <label for="login-senha">Senha</label>
+    <input type="password" id="login-senha" placeholder="Digite sua senha">
+
+    <button type="button" id="botao-login">
+      Entrar
+    </button>
+
+    <p id="mensagem-login"></p>
+
+  </section>
+
   <main class="container">
 
     <h1>Contatos</h1>
 
+     
     <!-- FORMULÁRIO -->
     <form id="form-contato">
 

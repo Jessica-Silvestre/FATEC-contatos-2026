@@ -220,8 +220,11 @@ input:focus {
 /*    LISTA — grade de 6 colunas */
 #lista-contatos {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  justify-content: center;
   gap: 14px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 /*    CARD RETANGULAR */
@@ -341,6 +344,85 @@ input:focus {
   background: #fbd0d0;
 }
 
+/* LOGIN */
+#container-login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+}
+
+#container-login h2 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  margin-right: 0.25rem;
+}
+
+#container-login label {
+  display: none;
+}
+
+#container-login input[type="email"],
+#container-login input[type="password"] {
+  width: 180px;
+  padding: 8px 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+#container-login input:focus {
+  border-color: var(--border-focus);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(107, 76, 59, 0.12);
+}
+
+#container-login input::placeholder {
+  color: var(--text-subtle);
+  font-size: 12px;
+}
+
+#container-login #botao-login {
+  padding: 8px 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.1s;
+}
+
+#container-login #botao-login:hover {
+  background: var(--accent-hover);
+}
+
+#container-login #botao-login:active {
+  transform: scale(0.98);
+}
+
+#mensagem-login {
+  font-size: 12px;
+  color: var(--text-subtle);
+  white-space: nowrap;
+  min-width: 1rem;
+}
 
 footer {
   font-family: 'JetBrains Mono', monospace;
@@ -355,19 +437,19 @@ footer {
 
 /*    RESPONSIVO*/
 @media (max-width: 1000px) {
-  #lista-contatos { grid-template-columns: repeat(5, 1fr); }
+  #lista-contatos { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 }
 
 @media (max-width: 800px) {
-  #lista-contatos { grid-template-columns: repeat(4, 1fr); }
+  #lista-contatos { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
 }
 
 @media (max-width: 600px) {
-  #lista-contatos { grid-template-columns: repeat(3, 1fr); }
+  #lista-contatos { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
   .fields { grid-template-columns: 1fr; }
   .field-group:last-child { grid-column: auto; }
 }
 
 @media (max-width: 380px) {
-  #lista-contatos { grid-template-columns: repeat(2, 1fr); }
+  #lista-contatos { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
 }
